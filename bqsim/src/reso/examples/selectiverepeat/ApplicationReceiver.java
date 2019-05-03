@@ -17,7 +17,7 @@ public class ApplicationReceiver extends AbstractApplication {
     @Override
     public void start() {
         SelectiveRepeatProtocol protocol = new SelectiveRepeatProtocol((IPHost) host);
-        ((IPHost) host).getIPLayer().addListener(SelectiveRepeatProtocol.IP_SELECTIVEREPEAT_PROTO, protocol);
+        ((IPHost) host).getIPLayer().addListener(SelectiveRepeatProtocol.IP_PROTO_SELECTIVEREPEAT, protocol);
 
     }
 
