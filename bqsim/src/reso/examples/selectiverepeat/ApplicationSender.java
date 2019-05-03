@@ -10,7 +10,7 @@ public class ApplicationSender extends AbstractApplication {
 
     private final IPAddress ipDestinary;
     private final IPLayer ip; //source ip
-    private int packetQuantity;
+    private int num;
     private float loss; //idk
 
     /**
@@ -18,17 +18,19 @@ public class ApplicationSender extends AbstractApplication {
      *
      * @param host is the host where the application is running.
      */
-    public ApplicationSender(IPHost host, IPAddress dst, int packetQuantity, float loss) {
+    public ApplicationSender(IPHost host, IPAddress dst, int num, float loss) {
         super(host, "selectiverepeatSender");
         this.ipDestinary = dst;
         this.ip = host.getIPLayer();
-        this.packetQuantity = packetQuantity;
+        this.num= num;
         this.loss = loss; //number of packets we're going to lose
 
     }
 
     @Override
     public void start() throws Exception {
+        ip.addListener(SelectiveRepeatProtocol.IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatProtocol((IPHost) host);
+        ip.send(IPAddress.ANY, ipDestinary, IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatMessage(num);
 
     }
 
