@@ -9,9 +9,10 @@ public class ApplicationSender extends AbstractApplication {
 
 
     private final IPAddress ipDestinary;
-    private final IPLayer ip;
+    private final IPLayer ip; //source ip
     private int packetQuantity;
-    private float loss;
+    private float loss; //idk
+
     /**
      * Creates a new application.
      *
@@ -22,7 +23,7 @@ public class ApplicationSender extends AbstractApplication {
         this.ipDestinary = dst;
         this.ip = host.getIPLayer();
         this.packetQuantity = packetQuantity;
-        this.loss = loss;
+        this.loss = loss; //number of packets we're going to lose
 
     }
 
