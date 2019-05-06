@@ -1,11 +1,11 @@
 package reso.examples.selectiverepeat;
 
+
 import reso.common.AbstractApplication;
 import reso.ip.IPHost;
 import reso.ip.IPLayer;
 
 public class ApplicationReceiver extends AbstractApplication {
-    // TODO add arraylist
     private float loss;
 
     public ApplicationReceiver(IPHost host,float loss){
