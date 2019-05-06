@@ -1,0 +1,21 @@
+package reso.examples.selectiverepeat;
+
+import reso.common.AbstractTimer;
+import reso.ip.IPAddress;
+
+public class SelectiveRepeatPacket {
+    public SelectiveRepeatMessage message;
+    public IPAddress address;
+    public AbstractTimer timer;
+
+
+    public SelectiveRepeatPacket(SelectiveRepeatMessage message, IPAddress address, AbstractTimer timer){
+        this.message = message;
+        this.address = address;
+        this.timer = timer;
+    }
+
+    public String toString() {
+        return "packet with message "+message.toString()+" and address dest: "+address.toString();
+    }
+}

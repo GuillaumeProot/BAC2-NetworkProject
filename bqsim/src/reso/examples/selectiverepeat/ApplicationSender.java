@@ -29,8 +29,8 @@ public class ApplicationSender extends AbstractApplication {
 
     @Override
     public void start() throws Exception {
-        ip.addListener(SelectiveRepeatProtocol.IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatProtocol((IPHost) host));
-        ip.send(IPAddress.ANY, ipDestinary, SelectiveRepeatProtocol.IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatMessage(num);
+        ip.addListener(SelectiveRepeatProtocol.IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatProtocol((IPHost) host,loss,0));
+        ip.send(IPAddress.ANY, ipDestinary, SelectiveRepeatProtocol.IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatMessage(num));
 
     }
 

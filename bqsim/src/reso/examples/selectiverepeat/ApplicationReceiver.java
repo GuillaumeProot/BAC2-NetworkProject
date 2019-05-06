@@ -5,7 +5,7 @@ import reso.ip.IPHost;
 import reso.ip.IPLayer;
 
 public class ApplicationReceiver extends AbstractApplication {
-
+    // TODO add arraylist
     private float loss;
 
     public ApplicationReceiver(IPHost host,float loss){
@@ -16,7 +16,7 @@ public class ApplicationReceiver extends AbstractApplication {
 
     @Override
     public void start() {
-        SelectiveRepeatProtocol protocol = new SelectiveRepeatProtocol((IPHost) host);
+        SelectiveRepeatProtocol protocol = new SelectiveRepeatProtocol((IPHost) host, 0,loss);
         ((IPHost) host).getIPLayer().addListener(SelectiveRepeatProtocol.IP_PROTO_SELECTIVEREPEAT, protocol);
 
     }
