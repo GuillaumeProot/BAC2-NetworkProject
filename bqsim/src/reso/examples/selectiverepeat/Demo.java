@@ -43,13 +43,12 @@ public class Demo {
 
             IPHost host1= NetworkBuilder.createHost(network, "H1", IP_ADDR1, MAC_ADDR1);
             host1.getIPLayer().addRoute(IP_ADDR2, "eth0");
-            if (ENABLE_SNIFFER)
-                host1.addApplication(new AppSniffer(host1, new String [] {"eth0"}));
-            host1.addApplication(new AppSender(host1, IP_ADDR2, 5));
+
+            host1.addApplication(new ApplicationSender(host1,IP_ADDR2,packetQuantities,lostPacket));
 
             IPHost host2= NetworkBuilder.createHost(network,"H2", IP_ADDR2, MAC_ADDR2);
             host2.getIPLayer().addRoute(IP_ADDR1, "eth0");
-            host2.addApplication(new AppReceiver(host2));
+            host2.addApplication(new ApplicationReceiver(host2,lostAck));
 
             EthernetInterface h1_eth0= (EthernetInterface) host1.getInterfaceByName("eth0");
             EthernetInterface h2_eth0= (EthernetInterface) host2.getInterfaceByName("eth0");

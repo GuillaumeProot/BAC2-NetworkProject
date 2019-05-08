@@ -47,6 +47,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         rttEstime = 1; // srtt
         rttEchantillon = rttEstime / 2;
         rto = 3;
+        window = new ArrayList<>(N);
         it=window.iterator();
         exp_seq_num=-1;
         numSeq=0;
@@ -66,23 +67,30 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
 
     @Override
     public void receive(IPInterfaceAdapter src, Datagram datagram) throws Exception {
+        System.out.println(scheduler.getCurrentTime() + ":reception de donnee");
         SelectiveRepeatMessage selectiveRepeatMessage = (SelectiveRepeatMessage) datagram.getPayload();
+        System.out.println(scheduler.getCurrentTime()+": num de sequence: "+selectiveRepeatMessage.num+" , data: "+selectiveRepeatMessage.payload);
         double receptionTime = host.getNetwork().getScheduler().getCurrentTime();
+
         if(selectiveRepeatMessage.payload.equals(INIT_REQUEST) && selectiveRepeatMessage.num == Integer.MIN_VALUE){
+            System.out.println(scheduler.getCurrentTime()+":    type: "+"init request");
+            System.out.println(scheduler.getCurrentTime()+": --> SEND: "+"init response");
             host.getIPLayer().send(IPAddress.ANY,datagram.src,IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatMessage(Integer.MIN_VALUE,INIT_REPONSE));
         }
 
         else if(selectiveRepeatMessage.payload.equals(INIT_REPONSE) && selectiveRepeatMessage.num == Integer.MIN_VALUE){
+            System.out.println(scheduler.getCurrentTime()+":    type: "+"init response");
             isInit = true;
             sendNext();
             rttEstime = receptionTime - init_time;
         }
         else if(selectiveRepeatMessage.payload.equals("ACK")){
-
+            System.out.println(scheduler.getCurrentTime()+":    type: "+"ACK");
             rtt = receptionTime - window.get(sendBase).time;
             try{
                 N = controller.receiveAck(selectiveRepeatMessage.num);
             }catch (Exception e){
+                System.out.println(scheduler.getCurrentTime()+": ERROR: "+" ACK sequence number error");
                 System.exit(-1);
             }
             if(controller.isThreeAck()){
@@ -104,7 +112,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
             rttEstime = newSrtt;
             rttEchantillon = newRttVar;
             rto = rttEstime + 4 * rttEchantillon;
-            // TODO envoi suivant avec timer new rto
+
 
         }
         else{
@@ -140,11 +148,12 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
             float r = random.nextFloat();
             if (r > lostPacket){
                 packet.time = scheduler.getCurrentTime();
+                System.out.println(scheduler.getCurrentTime() + ": --> send: message: "+packet.message.num);
                 host.getIPLayer().send(IPAddress.ANY, packet.address,IP_PROTO_SELECTIVEREPEAT,packet.message);
                 MyTimer timer = new MyTimer(scheduler, rto, packet.message.num);
             }
             else{
-                // TODO paquet perdu (print)
+                System.out.println(scheduler.getCurrentTime()+": paquet perdu");
             }
             next_seq_num ++;
             sendNext();
@@ -175,7 +184,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
 
         try {
             f.write(scheduler.getCurrentTime()+" "+N+"\n");
-
+            System.out.println(scheduler.getCurrentTime() + " : taille de la fenetre: "+ N);
             if(window.isEmpty() && close){
                 f.close();
             }
