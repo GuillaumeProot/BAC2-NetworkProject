@@ -1,5 +1,7 @@
 package reso.examples.selectiverepeat;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Queue;
@@ -31,6 +33,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
     private AbstractScheduler scheduler;
     private Random random;
     private double init_time;
+    private FileWriter f;
 
     public SelectiveRepeatProtocol(IPHost host, float lostPacket, float lostAck) {
         controller = new CongestionControl();
@@ -50,6 +53,15 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         next_seq_num=0;
         sendBase=0;
         random=new Random();
+
+
+        try {
+            f=new FileWriter("data.txt",false);
+            NChanged(false);
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println(scheduler.getCurrentTime()+": ERROR: "+"chargement de fichier impossible");
+        }
     }
 
     @Override
@@ -156,6 +168,21 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         numSeq++;
         if (isInit)
             sendNext();
+    }
+
+
+    private void NChanged(boolean close){
+
+        try {
+            f.write(scheduler.getCurrentTime()+" "+N+"\n");
+
+            if(window.isEmpty() && close){
+                f.close();
+            }
+
+        } catch (IOException e) {
+            System.out.println(scheduler.getCurrentTime()+": ERROR: "+"ecriture impossible dans le fichier");
+        }
     }
 
 

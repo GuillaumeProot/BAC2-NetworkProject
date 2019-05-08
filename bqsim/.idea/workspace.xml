@@ -2,116 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dae3db10-10b5-4dd5-81ad-716dae2a9c74" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/reso/common/AbstractApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/AbstractHardwareInterface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/AbstractInterface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/AbstractMessage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/AbstractMessageWithPayload.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/AbstractTimer$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/AbstractTimer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/Address.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/EventMessageSend.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/HardwareInterface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/Host.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/Interface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/InterfaceAttrListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/Link.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/ListenerList.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/Message.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/MessageListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/MessageWithPayload.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/Network.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/ProtocolTable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/common/Task.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ethernet/EthernetAddress.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ethernet/EthernetFrame$PROTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ethernet/EthernetFrame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ethernet/EthernetInterface$QueueEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ethernet/EthernetInterface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ethernet/Hub$EthernetPort.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ethernet/Hub.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/alone/AppAlone$MyTimer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/alone/Demo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/arp/Demo$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/arp/Demo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/dv_routing/DVMessage$DV.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/dv_routing/DVMessage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/dv_routing/DVRoutingEntry.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/dv_routing/DVRoutingProtocol.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/dv_routing/Demo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/load_topology/Demo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/pingpong/AppReceiver.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/pingpong/AppSender.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/pingpong/Demo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/pingpong/PingPongMessage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/pingpong/PingPongProtocol.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/AbstractPacketGenerator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/AppPacketSink$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/AppPacketSink$InternalIPInterfaceListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/AppPacketSink.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/AppPacketSource$InternalTimer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/AppPacketSource.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/Demo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/PacketGenConstant.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/PacketGenRandomExponential.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/PacketGenerator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/queueing/ProbeMessage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/ApplicationReceiver.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/ApplicationSender.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/CongestionControl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/Demo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatMessage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatPacket.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatProtocol$MyTimer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatProtocol.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/TimerListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/static_routing/AppSniffer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/examples/static_routing/Demo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/AbstractIPInterfaceAdapter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/Datagram.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/FIB.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/ICMPMessage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/ICMPProtocol.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPAddress.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPEthernetAdapter$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPEthernetAdapter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPHost.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPInterfaceAdapter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPInterfaceListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPLayer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPLoopbackAdapter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPRouteEntry.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/IPRouter.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/arp/ARPEntry$STATE.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/arp/ARPEntry.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/arp/ARPMessage$Type.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/arp/ARPMessage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/arp/ARPProtocol$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/arp/ARPProtocol$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/arp/ARPProtocol$InternalAgingTimer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/arp/ARPProtocol$TaskSendFrame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/ip/arp/ARPProtocol.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/scheduler/AbstractEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/scheduler/AbstractScheduler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/scheduler/Scheduler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/scheduler/SchedulerException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/Delays.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/FIBDumper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/Monitor$MonitorEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/Monitor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/MonitorIdMetric$MonitorEventIdMetric.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/MonitorIdMetric.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/MonitorTimeMetric$MonitorEventTimeMetric.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/MonitorTimeMetric.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/NetworkBuilder$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/NetworkBuilder$State.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/NetworkBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/NetworkGrapher.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reso/utilities/NetworkTracer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reso/examples/alone/AppAlone.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/reso/examples/alone/AppAlone.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatProtocol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatProtocol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bqsim.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bqsim.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/ApplicationReceiver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/ApplicationSender.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/CongestionControl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/Demo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatMessage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatPacket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatProtocol$MyTimer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatProtocol.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/TimerListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/examples/selectiverepeat/TimerListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reso/testing/TestIPAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/reso/testing/TestIPAddress.java" afterDir="false" />
     </list>
     <ignored path="bqsim.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -128,6 +31,16 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/src/reso/examples/selectiverepeat">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="bqsim" />
   </component>
@@ -136,10 +49,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatProtocol.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="138" column="9" lean-forward="true" selection-start-line="138" selection-start-column="9" selection-end-line="138" selection-end-column="9" />
+            <state relative-caret-position="151">
+              <caret line="131" column="80" selection-start-line="131" selection-start-column="80" selection-end-line="131" selection-end-column="80" />
               <folding>
                 <element signature="class#MyTimer#0;class#SelectiveRepeatProtocol#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reso/testing/TestIPAddress.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="969">
+              <caret line="57" column="4" lean-forward="true" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,18 +96,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/TimerListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/Demo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="17">
               <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -215,7 +131,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/ApplicationSender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
+            <state relative-caret-position="238">
               <caret line="32" column="126" selection-start-line="32" selection-start-column="126" selection-end-line="32" selection-end-column="126" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -229,18 +145,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="417">
               <caret line="60" column="53" selection-start-line="60" selection-start-column="53" selection-end-line="60" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reso/examples/pingpong/PingPongProtocol.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="18" column="60" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="60" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -275,6 +179,7 @@
         <option value="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatMessage.java" />
         <option value="$PROJECT_DIR$/src/reso/examples/selectiverepeat/CongestionControl.java" />
         <option value="$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatProtocol.java" />
+        <option value="$PROJECT_DIR$/src/reso/testing/TestIPAddress.java" />
       </list>
     </option>
   </component>
@@ -315,7 +220,22 @@
               <item name="bqsim" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="reso" type="462c0819:PsiDirectoryNode" />
-              <item name="ip" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bqsim" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bqsim" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="reso" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="selectiverepeat" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bqsim" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bqsim" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="reso" type="462c0819:PsiDirectoryNode" />
+              <item name="testing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -326,12 +246,16 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554286189910" />
-    <property name="external.system.task.project.file.to.start" value="$PROJECT_DIR$" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="external.system.task.project.file.to.start" value="$PROJECT_DIR$/src/reso/examples/selectiverepeat" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/reso/examples/selectiverepeat" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -347,7 +271,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.C:/Users/guill/Desktop/projetReseau/bqsim/src/reso/examples/selectiverepeat [run]">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -360,10 +284,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="C:/Users/guill/Desktop/projetReseau/bqsim [run]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+    <configuration name="C:/Users/guill/Desktop/projetReseau/bqsim/src/reso/examples/selectiverepeat [run]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/src/reso/examples/selectiverepeat" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
@@ -378,6 +302,17 @@
       </ExternalSystemSettings>
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
+    </configuration>
+    <configuration name="Unnamed" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="bqsim" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
@@ -404,6 +339,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Gradle.C:/Users/guill/Desktop/projetReseau/bqsim/src/reso/examples/selectiverepeat [run]" />
+      <item itemvalue="JUnit.Unnamed" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -423,27 +362,33 @@
       <workItem from="1556864745912" duration="5762000" />
       <workItem from="1557143217861" duration="5593000" />
       <workItem from="1557210534708" duration="4761000" />
-      <workItem from="1557305032946" duration="15833000" />
+      <workItem from="1557305032946" duration="16824000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Unnamed - 2019.05.08 at 16h 26m 30s.xml">
+      <configuration name="Unnamed" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43195000" />
+    <option name="totallyTimeSpent" value="44186000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="762" y="0" width="781" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.42024964" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.4188627" />
       <window_info id="Structure" order="1" weight="0.24966443" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Palette&#9;" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Image Layers" order="6" />
+      <window_info anchor="bottom" id="Messages" weight="0.3286119" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3323782" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -548,51 +493,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/ApplicationReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" column="92" selection-start-line="18" selection-start-column="92" selection-end-line="18" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/ApplicationSender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="32" column="126" selection-start-line="32" selection-start-column="126" selection-end-line="32" selection-end-column="126" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/TimerListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/Demo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#560#561#0" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reso/ip/Datagram.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -613,6 +513,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/TimerListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#560#561#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reso/testing/TestIPAddress.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="969">
+          <caret line="57" column="4" lean-forward="true" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/ApplicationReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="92" selection-start-line="18" selection-start-column="92" selection-end-line="18" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/ApplicationSender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="32" column="126" selection-start-line="32" selection-start-column="126" selection-end-line="32" selection-end-column="126" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/Demo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/CongestionControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="417">
@@ -622,8 +577,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/reso/examples/selectiverepeat/SelectiveRepeatProtocol.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="138" column="9" lean-forward="true" selection-start-line="138" selection-start-column="9" selection-end-line="138" selection-end-column="9" />
+        <state relative-caret-position="151">
+          <caret line="131" column="80" selection-start-line="131" selection-start-column="80" selection-end-line="131" selection-end-column="80" />
           <folding>
             <element signature="class#MyTimer#0;class#SelectiveRepeatProtocol#0" />
           </folding>

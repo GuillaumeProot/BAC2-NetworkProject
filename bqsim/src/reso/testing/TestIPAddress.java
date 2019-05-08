@@ -2,8 +2,11 @@ package reso.testing;
 
 import org.junit.Test;
 
+
 import reso.ip.IPAddress;
 import junit.framework.TestCase;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestIPAddress extends TestCase {
 	
