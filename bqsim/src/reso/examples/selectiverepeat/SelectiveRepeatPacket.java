@@ -6,13 +6,13 @@ import reso.ip.IPAddress;
 public class SelectiveRepeatPacket {
     public SelectiveRepeatMessage message;
     public IPAddress address;
-    public AbstractTimer timer;
+    public double time;
 
 
-    public SelectiveRepeatPacket(SelectiveRepeatMessage message, IPAddress address, AbstractTimer timer){
+    public SelectiveRepeatPacket(SelectiveRepeatMessage message, IPAddress address, double time){
         this.message = message;
         this.address = address;
-        this.timer = timer;
+        this.time = time;
     }
 
     public String toString() {

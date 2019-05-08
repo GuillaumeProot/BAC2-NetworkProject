@@ -1,7 +1,9 @@
 package reso.examples.selectiverepeat;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Queue;
+import java.util.Random;
 
 import reso.common.AbstractTimer;
 import reso.ip.*;
@@ -9,7 +11,9 @@ import reso.scheduler.AbstractScheduler;
 
 public class SelectiveRepeatProtocol implements IPInterfaceListener {
     private ArrayList queue;
+    private int exp_seq_num,next_seq_num, sendBase ;
     private Queue<SelectiveRepeatPacket> window;
+    private Iterator<SelectiveRepeatPacket> it;
     private int wantedNum;
     private boolean isInit = false;
     private boolean initMessageSend = false;
@@ -23,9 +27,9 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
     private MyTimer timer;
     private double alpha, beta, rttEchantillon, rttEstime, rto,rtt;
     private AbstractScheduler scheduler;
+    private Random random;
 
     public SelectiveRepeatProtocol(IPHost host, float lostPacket, float lostAck) {
-        this.numSeq = 0;
         controller = new CongestionControl();
         N = controller.initSize;
         this.host = host;
@@ -35,11 +39,34 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         alpha = 0.125;
         beta = 0.25;
         rttEstime = 1;
+        it=window.iterator();
+        exp_seq_num=-1;
+        numSeq=0;
+        next_seq_num=0;
+        sendBase=0;
+        random=new Random();
     }
 
     @Override
     public void receive(IPInterfaceAdapter src, Datagram datagram) throws Exception {
         
+    }
+
+    private void sendNext() throws Exception{
+        if(it.hasNext() && next_seq_num < sendBase + N){
+            SelectiveRepeatPacket packet = it.next();
+            float r = random.nextFloat();
+            if (r >lostPacket){
+                packet.time = scheduler.getCurrentTime();
+                host.getIPLayer().send(IPAddress.ANY, packet.address,IP_PROTO_SELECTIVEREPEAT,packet.message);
+                //TODO init timer
+            }
+            else{
+                // TODO paquet perdu (print)
+            }
+            next_seq_num ++;
+            sendNext();
+        }
     }
 
     public void send(IPAddress src, String data) throws Exception {
@@ -58,16 +85,6 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
             sendNext();
     }
 
-    public void checkTimer(Queue<SelectiveRepeatPacket> window, boolean stop){
-        if(window.size() == 0 || stop){
-            return
-        }
-        else{
-            for(SelectiveRepeatPacket packet: window){
-                if(packet.timer
-            }
-        }
-    }
 
     private class MyTimer extends AbstractTimer {
         public MyTimer(AbstractScheduler scheduler, double interval) {
@@ -77,7 +94,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         protected void run() throws Exception {
             System.out.println(scheduler.getCurrentTime()+": ---- TIMEOUT");
             N=controller.isALoss(true);// change the size of the window because there is a timeout
-            NChanged(true);
+            //NChanged(true);
             next_seq_num = sendBase;
             it=window.iterator();
             sendNext();
