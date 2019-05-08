@@ -13,7 +13,8 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
     private ArrayList queue;
     private int exp_seq_num,next_seq_num, sendBase ;
     private ArrayList<SelectiveRepeatPacket> window;
-    private ArrayList<SelectiveRepeatMessage> cache;
+    private ArrayList<SelectiveRepeatMessage> cacheSender;
+    private ArrayList<SelectiveRepeatMessage> cacheReceiver;
     private Iterator<SelectiveRepeatPacket> it;
     private int wantedNum;
     private boolean isInit = false;
@@ -56,7 +57,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         SelectiveRepeatMessage selectiveRepeatMessage = (SelectiveRepeatMessage) datagram.getPayload();
         double receptionTime = host.getNetwork().getScheduler().getCurrentTime();
         if(selectiveRepeatMessage.payload.equals(INIT_REQUEST) && selectiveRepeatMessage.num == Integer.MIN_VALUE){
-            host.getIPLayer().send(IPAddress.ANY,datagram.src,IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatMessage(Integer.MIN_VALUE,INIT_REPONSE, int ));
+            host.getIPLayer().send(IPAddress.ANY,datagram.src,IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatMessage(Integer.MIN_VALUE,INIT_REPONSE));
         }
 
         else if(selectiveRepeatMessage.payload.equals(INIT_REPONSE) && selectiveRepeatMessage.num == Integer.MIN_VALUE){
@@ -78,9 +79,9 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
                 sendNext();
             }
             if(selectiveRepeatMessage.num >= sendBase && selectiveRepeatMessage.num <= sendBase){
-                cache.add(selectiveRepeatMessage);
-                for(int i = 0; i < cache.size(); i++) { // boucle car premier elem incremente
-                    if (cache.contains(window.get(sendBase).message)) {
+                cacheSender.add(selectiveRepeatMessage);
+                for(int i = 0; i < cacheSender.size(); i++) { // boucle car premier elem incremente
+                    if (cacheSender.contains(window.get(sendBase).message)) {
                         sendBase += 1;
                     }
                 }
@@ -95,7 +96,23 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
 
         }
         else{
-            
+            if(selectiveRepeatMessage.num >= sendBase && selectiveRepeatMessage.num <= sendBase) {
+                cacheReceiver.add(selectiveRepeatMessage);
+                for(int i = 0; i < cacheReceiver.size(); i++) {
+                    if (cacheReceiver.contains(window.get(sendBase).message)) {
+                        sendBase += 1;
+                    }
+                }
+            }
+            if (selectiveRepeatMessage.num == exp_seq_num +1){
+                exp_seq_num++;
+            }
+            SelectiveRepeatMessage ack = new SelectiveRepeatMessage(exp_seq_num);
+            float r = random.nextFloat();
+
+            if (r > lostAck){
+                host.getIPLayer().send(IPAddress.ANY, datagram.src, IP_PROTO_SELECTIVEREPEAT, ack);
+            }
         }
 
 
@@ -107,9 +124,10 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         if(it.hasNext() && next_seq_num < sendBase + N){
             SelectiveRepeatPacket packet = it.next();
             float r = random.nextFloat();
-            if (r >lostPacket){
+            if (r > lostPacket){
                 packet.time = scheduler.getCurrentTime();
                 host.getIPLayer().send(IPAddress.ANY, packet.address,IP_PROTO_SELECTIVEREPEAT,packet.message);
+                MyTimer timer = new MyTimer(scheduler, rto, packet.message.num);
                 //TODO init timer
             }
             else{
@@ -132,7 +150,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         }
         SelectiveRepeatMessage message = new SelectiveRepeatMessage( numSeq,data);
         SelectiveRepeatPacket packet = new SelectiveRepeatPacket(message, src, -1);
-        window.offer(packet);
+        window.add(packet);
         it = window.iterator();
         numSeq++;
         if (isInit)
@@ -142,8 +160,11 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
 
 
     private class MyTimer extends AbstractTimer {
-        public MyTimer(AbstractScheduler scheduler, double interval) {
+        private final int numTimer;
+
+        public MyTimer(AbstractScheduler scheduler, double interval, int numTimer) {
             super(scheduler, interval, false);
+            this.numTimer = numTimer;
         }
 
         protected void run() throws Exception {
@@ -152,8 +173,8 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
             //NChanged(true);
             next_seq_num = sendBase;
             it=window.iterator();
-            sendNext();
-
+            host.getIPLayer().send(IPAddress.ANY, window.get(numTimer).address,IP_PROTO_SELECTIVEREPEAT,window.get(numTimer).message);
+            MyTimer timer = new MyTimer(scheduler, rto, numTimer);
         }
     }
 }
