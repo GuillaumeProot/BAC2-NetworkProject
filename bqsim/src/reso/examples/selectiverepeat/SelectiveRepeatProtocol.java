@@ -12,12 +12,13 @@ import reso.scheduler.AbstractScheduler;
 public class SelectiveRepeatProtocol implements IPInterfaceListener {
     private ArrayList queue;
     private int exp_seq_num,next_seq_num, sendBase ;
-    private Queue<SelectiveRepeatPacket> window;
+    private ArrayList<SelectiveRepeatPacket> window;
+    private ArrayList<SelectiveRepeatMessage> cache;
     private Iterator<SelectiveRepeatPacket> it;
     private int wantedNum;
     private boolean isInit = false;
     private boolean initMessageSend = false;
-    public final static String INIT_REQUEST = "init request";
+    public final static String INIT_REQUEST = "init request",INIT_REPONSE="init_response";
     public static final int IP_PROTO_SELECTIVEREPEAT = Datagram.allocateProtocolNumber("SELECTIVE_REPEAT");
     private int numSeq;
     private CongestionControl controller;
@@ -28,6 +29,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
     private double alpha, beta, rttEchantillon, rttEstime, rto,rtt;
     private AbstractScheduler scheduler;
     private Random random;
+    private double init_time;
 
     public SelectiveRepeatProtocol(IPHost host, float lostPacket, float lostAck) {
         controller = new CongestionControl();
@@ -38,7 +40,9 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         scheduler=host.getNetwork().getScheduler();
         alpha = 0.125;
         beta = 0.25;
-        rttEstime = 1;
+        rttEstime = 1; // srtt
+        rttEchantillon = rttEstime / 2;
+        rto = 3;
         it=window.iterator();
         exp_seq_num=-1;
         numSeq=0;
@@ -49,8 +53,55 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
 
     @Override
     public void receive(IPInterfaceAdapter src, Datagram datagram) throws Exception {
-        
+        SelectiveRepeatMessage selectiveRepeatMessage = (SelectiveRepeatMessage) datagram.getPayload();
+        double receptionTime = host.getNetwork().getScheduler().getCurrentTime();
+        if(selectiveRepeatMessage.payload.equals(INIT_REQUEST) && selectiveRepeatMessage.num == Integer.MIN_VALUE){
+            host.getIPLayer().send(IPAddress.ANY,datagram.src,IP_PROTO_SELECTIVEREPEAT, new SelectiveRepeatMessage(Integer.MIN_VALUE,INIT_REPONSE, int ));
+        }
+
+        else if(selectiveRepeatMessage.payload.equals(INIT_REPONSE) && selectiveRepeatMessage.num == Integer.MIN_VALUE){
+            isInit = true;
+            sendNext();
+            rttEstime = receptionTime - init_time;
+        }
+        else if(selectiveRepeatMessage.payload.equals("ACK")){
+
+            rtt = receptionTime - window.get(sendBase).time;
+            try{
+                N = controller.receiveAck(selectiveRepeatMessage.num);
+            }catch (Exception e){
+                System.exit(-1);
+            }
+            if(controller.isThreeAck()){
+                next_seq_num = sendBase;
+                it = window.iterator();
+                sendNext();
+            }
+            if(selectiveRepeatMessage.num >= sendBase && selectiveRepeatMessage.num <= sendBase){
+                cache.add(selectiveRepeatMessage);
+                for(int i = 0; i < cache.size(); i++) { // boucle car premier elem incremente
+                    if (cache.contains(window.get(sendBase).message)) {
+                        sendBase += 1;
+                    }
+                }
+
+            }
+            double newSrtt = (1 - alpha)* rttEstime + alpha * rtt;
+            double newRttVar = (1 - beta) * rttEchantillon + beta*Math.abs(newSrtt-rtt);
+            rttEstime = newSrtt;
+            rttEchantillon = newRttVar;
+            rto = rttEstime + 4 * rttEchantillon;
+            // TODO envoi suivant avec timer new rto
+
+        }
+        else{
+            
+        }
+
+
     }
+
+
 
     private void sendNext() throws Exception{
         if(it.hasNext() && next_seq_num < sendBase + N){
@@ -69,12 +120,15 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         }
     }
 
+
+
     public void send(IPAddress src, String data) throws Exception {
 
 
         if(!isInit && !initMessageSend){
             SelectiveRepeatMessage message = new SelectiveRepeatMessage( Integer.MIN_VALUE,INIT_REQUEST);
             host.getIPLayer().send(IPAddress.ANY, src, IP_PROTO_SELECTIVEREPEAT, message);
+            init_time = scheduler.getCurrentTime();
         }
         SelectiveRepeatMessage message = new SelectiveRepeatMessage( numSeq,data);
         SelectiveRepeatPacket packet = new SelectiveRepeatPacket(message, src, -1);
@@ -84,6 +138,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         if (isInit)
             sendNext();
     }
+
 
 
     private class MyTimer extends AbstractTimer {

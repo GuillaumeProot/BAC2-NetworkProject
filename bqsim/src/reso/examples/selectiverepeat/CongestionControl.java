@@ -5,13 +5,13 @@ public class CongestionControl {
     final static int initSize = 1;
     private double size;
     private int ackCounter;
-    private int lastAckReceive;
+    private int lastExpectedReceived;
     private int sstresh;
     private boolean threeAckFlag;
 
     public CongestionControl(){
         ackCounter = 0;
-        lastAckReceive = -1;
+        lastExpectedReceived = -1;
         this.size = initSize;
         this.sstresh = 10;
         threeAckFlag = false;
@@ -46,7 +46,7 @@ public class CongestionControl {
     }
 
     public int receiveAck(int seqNumber) throws Exception{
-        if(seqNumber == lastAckReceive){
+        if(seqNumber == lastExpectedReceived){
             ackCounter ++;
             if (isThreeAck()){
                 return isALoss(false);
@@ -57,15 +57,15 @@ public class CongestionControl {
             }
             return (int)size;
         }
-        else if(seqNumber > lastAckReceive){
-            int difference = seqNumber - lastAckReceive;
+        else if(seqNumber > lastExpectedReceived){
+            int difference = seqNumber - lastExpectedReceived;
             if(size < sstresh){
                 size += difference;
             }
             else{
                 size = size + (1/size);
             }
-            lastAckReceive =seqNumber;
+            lastExpectedReceived =seqNumber;
             ackCounter = 0;
             int toReturn = (int) size;
             if(size < 1 || toReturn <1){

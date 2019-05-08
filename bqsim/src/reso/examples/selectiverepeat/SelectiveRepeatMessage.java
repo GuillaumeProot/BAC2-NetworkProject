@@ -6,15 +6,18 @@ public class SelectiveRepeatMessage implements Message {
 
     public final int num;
     public final String payload;
+    public final int expected;
 
-    public SelectiveRepeatMessage(int num, String payload){
+    public SelectiveRepeatMessage(int num, String payload, int expected){
         this.payload = payload;
         this.num = num;
+        this.expected = expected;
     }
 
-    public SelectiveRepeatMessage(int num){
+    public SelectiveRepeatMessage(int num, int expected){
         this.payload = "ACK";
         this.num = num;
+        this.expected = expected;
     }
 
     public String toString() {
