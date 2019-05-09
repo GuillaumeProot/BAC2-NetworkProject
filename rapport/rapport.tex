@@ -1,0 +1,102 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{geometry}
+\geometry{hmargin=2cm,vmargin=1.5cm}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+
+{\Large Université de Mons}\\[1ex]
+{\Large Faculté des sciences}\\[1ex]
+{\Large Département d'Informatique}\\[2.5cm]
+
+\newcommand{\HRule}{\rule{\linewidth}{0.3mm}}
+% Title
+\HRule \\[0.3cm]
+{ \LARGE \bfseries Projet Reseau 1 \\[0.3cm]}
+{ \LARGE \bfseries Selective Repeat et Congestion  \\[0.1cm]} % Commenter si pas besoin
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}[t]{0.45\textwidth}
+\begin{flushleft} \large
+\emph{Professeur:}\\
+Bruno \textsc{Quoitin}\\
+Jérémy \textsc{Dubrulle}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+\begin{flushright} \large
+\emph{Auteur:} \\
+Laurent \textsc{Bossart} \\
+Guillaume \textsc{Proot} 
+\end{flushright}
+\end{minipage}\\[2ex]
+
+\vfill
+
+% Bottom of the page
+\begin{center}
+\begin{tabular}[t]{c c c}
+\includegraphics[height=1.5cm]{logoumons.jpg} &
+\hspace{0.3cm} &
+\includegraphics[height=1.5cm]{logofs.jpg}
+\end{tabular}
+\end{center}~\\
+ 
+{\large Année académique 2018-2019}
+
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\pagebreak
+
+\section{Construction et exécution}
+	Pour compiler notre programme, il faut se placer dans le dossier contenant le package reso et entrer la commande suivante : \textit{javac reso/examples/selectiverepeat/*.java -Xlint}.
+	Pour exécuter notre programme, il suffit d'entrer la commande suivante: \textit{java reso.examples.selectiverepeat.Demo} en passant en paramètres: un entier qui est le nombre de paquets que l'on veut envoyer, deux floats qui sont respectivement le taux de perte de paquets et de ACKs (flotants compris entre 0 et 1. Où 1 représente une perte de 100 \%). Si un ou plusieurs paramètres sont maquants ou incorrectes, les paramètres par défault seront appliqués, càd respectivement 10, 0.2, 0.0.
+
+\section{Approche utilisée pour l'implémentation}
+	\subsection{Selective Repeat}
+		\begin{itemize}
+			
+
+		\end{itemize}
+
+	\subsection{Congestion Control}
+		\begin{itemize}
+			
+		\end{itemize}
+
+\section{Les difficultés rencontrées}
+	
+	\subsection{difficultés liées à l'utilisation du simulateur}
+		\begin{itemize}
+
+		\end{itemize}
+
+	\subsection{Difficultés liées à l'implémentation de Selective Repeat et de Congestion Control}
+		\begin{itemize}
+			
+		\end{itemize}
+
+\section{L'état de l'implémentation finale}
+	
+
+\section{Note d'utilisation}
+	\begin{itemize}
+		\item Etant donné que pour chaque utilisation la taille de la fenetre ne sera pas constante, lors de l'exécution de notre programme nous stockons dans un fichier \textit{data.txt} les données de la taille de la fenetre de la dernière exécution.
+	La colonne de gauche représente le temps du scheduler et la colonne de droite la taille de la fenètre à ce moment là.
+	Pour créer le plot de la dernière exécution, il faut renter la commande suivante via gnuplot:
+	\begin{center}
+		\textit{plot "data.txt" with linespoints}
+	\end{center} 
+	\item Nous avons choisi d'afficher les logs du déroulement de paquets directement dans la console.
+	\end{itemize}
+	
+
+\end{document}
