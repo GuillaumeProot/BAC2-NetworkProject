@@ -34,7 +34,7 @@ public class ApplicationSender extends AbstractApplication {
         SelectiveRepeatProtocol protocol = new SelectiveRepeatProtocol((IPHost)host,loss,0);
         ip.addListener(SelectiveRepeatProtocol.IP_PROTO_SELECTIVEREPEAT,protocol);
         for(int i = 0; i<= num; i++){
-            protocol.send(ipDestinary,"Je suis le paquet" + i);
+            protocol.send(ipDestinary,"Je suis le paquet " + i);
         }
     }
 

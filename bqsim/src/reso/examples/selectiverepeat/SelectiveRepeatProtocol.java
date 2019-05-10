@@ -12,27 +12,27 @@ import reso.ip.*;
 import reso.scheduler.AbstractScheduler;
 
 public class SelectiveRepeatProtocol implements IPInterfaceListener {
-    private ArrayList queue;
-    private int exp_seq_num,next_seq_num, sendBase ;
+    private int exp_seq_num,next_seq_num, sendBase, numSeq ;
+    private int N;
+    public static final int IP_PROTO_SELECTIVEREPEAT = Datagram.allocateProtocolNumber("SELECTIVE_REPEAT");
+    private float lostAck, lostPacket;
+    private double alpha, beta, rttEchantillon, rttEstime, rto,rtt;
+    private double init_time;
+
     private ArrayList<SelectiveRepeatPacket> window;
-    private ArrayList<SelectiveRepeatMessage> cacheSender;
-    private ArrayList<SelectiveRepeatMessage> cacheReceiver;
+    private ArrayList<SelectiveRepeatMessage> cacheSender = new ArrayList<>();
+    private ArrayList<SelectiveRepeatMessage> cacheReceiver = new ArrayList<>();
     private Iterator<SelectiveRepeatPacket> it;
-    private int wantedNum;
+
     private boolean isInit = false;
     private boolean initMessageSend = false;
+
     public final static String INIT_REQUEST = "init request",INIT_REPONSE="init_response";
-    public static final int IP_PROTO_SELECTIVEREPEAT = Datagram.allocateProtocolNumber("SELECTIVE_REPEAT");
-    private int numSeq;
+
     private CongestionControl controller;
-    private int N;
-    private float lostAck, lostPacket;
     private final IPHost host;
-    private MyTimer timer;
-    private double alpha, beta, rttEchantillon, rttEstime, rto,rtt;
     private AbstractScheduler scheduler;
     private Random random;
-    private double init_time;
     private FileWriter f;
 
     public SelectiveRepeatProtocol(IPHost host, float lostPacket, float lostAck) {
@@ -56,11 +56,11 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         random=new Random();
 
 
+
         try {
             f=new FileWriter("data.txt",false);
             NChanged(false);
         } catch (IOException e) {
-            //e.printStackTrace();
             System.out.println(scheduler.getCurrentTime()+": ERROR: "+"chargement de fichier impossible");
         }
     }
@@ -118,7 +118,10 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         else{
 
             if(selectiveRepeatMessage.num >= sendBase && selectiveRepeatMessage.num <= sendBase) {
+                System.out.println(scheduler.getCurrentTime()+":    type: "+"message");
                 cacheReceiver.add(selectiveRepeatMessage);
+                System.out.println(cacheReceiver.size());
+                System.out.println(window.size());
                 for(int i = 0; i < cacheReceiver.size(); i++) {
                     if (cacheReceiver.contains(window.get(sendBase).message)) {
                         sendBase += 1;
@@ -134,6 +137,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
             if (r > lostAck){
                 host.getIPLayer().send(IPAddress.ANY, datagram.src, IP_PROTO_SELECTIVEREPEAT, ack);
             }
+            System.out.println("--------------------------------------- \n");
 
         }
 
