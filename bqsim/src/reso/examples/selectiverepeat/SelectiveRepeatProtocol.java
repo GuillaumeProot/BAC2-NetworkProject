@@ -14,6 +14,7 @@ import reso.scheduler.AbstractScheduler;
 public class SelectiveRepeatProtocol implements IPInterfaceListener {
     private int exp_seq_num,next_seq_num, sendBase, numSeq ;
     private int N;
+    private int expected_num_received =0, expected_num_sended =0;
     public static final int IP_PROTO_SELECTIVEREPEAT = Datagram.allocateProtocolNumber("SELECTIVE_REPEAT");
     private float lostAck, lostPacket;
     private double alpha, beta, rttEchantillon, rttEstime, rto,rtt;
@@ -22,6 +23,7 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
     private ArrayList<SelectiveRepeatPacket> window;
     private ArrayList<SelectiveRepeatMessage> cacheSender = new ArrayList<>();
     private ArrayList<SelectiveRepeatMessage> cacheReceiver = new ArrayList<>();
+    private ArrayList<MyTimer> timer_list = new ArrayList<>();
     private Iterator<SelectiveRepeatPacket> it;
 
     private boolean isInit = false;
@@ -94,16 +96,25 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
                 System.exit(-1);
             }
             if(controller.isThreeAck()){
+                System.out.println("is3ack");
                 next_seq_num = sendBase;
                 it = window.iterator();
                 sendNext();
             }
             if(selectiveRepeatMessage.num >= sendBase && selectiveRepeatMessage.num <= sendBase){
+
                 cacheSender.add(selectiveRepeatMessage);
                 for(int i = 0; i < cacheSender.size(); i++) { // boucle car premier elem incremente
-                    if (cacheSender.contains(window.get(sendBase).message)) {
-                        sendBase += 1;
+                    for(SelectiveRepeatMessage message:cacheSender){
+                        if(message.num == expected_num_sended){
+                            expected_num_sended ++;
+                            sendBase ++;
+                            System.out.println("message.num: " + message.num);
+                            timer_list.get(message.num).stop();
+                            System.out.println("timer :"+ message.num);
+                        }
                     }
+
                 }
 
             }
@@ -112,26 +123,28 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
             rttEstime = newSrtt;
             rttEchantillon = newRttVar;
             rto = rttEstime + 4 * rttEchantillon;
+            sendNext();
 
-
+            NChanged(true);
         }
         else{
 
             if(selectiveRepeatMessage.num >= sendBase && selectiveRepeatMessage.num <= sendBase) {
                 System.out.println(scheduler.getCurrentTime()+":    type: "+"message");
                 cacheReceiver.add(selectiveRepeatMessage);
-                System.out.println(cacheReceiver.size());
-                System.out.println(window.size());
                 for(int i = 0; i < cacheReceiver.size(); i++) {
-                    if (cacheReceiver.contains(window.get(sendBase).message)) {
-                        sendBase += 1;
+                    for (SelectiveRepeatMessage message: cacheReceiver){
+                        if(message.num == expected_num_received){
+                            sendBase +=1;
+                            expected_num_received +=1;
+                        }
                     }
                 }
             }
             if (selectiveRepeatMessage.num == exp_seq_num +1){
                 exp_seq_num++;
             }
-            SelectiveRepeatMessage ack = new SelectiveRepeatMessage(exp_seq_num);
+            SelectiveRepeatMessage ack = new SelectiveRepeatMessage(selectiveRepeatMessage.num);
             float r = random.nextFloat();
 
             if (r > lostAck){
@@ -148,18 +161,26 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
 
     private void sendNext() throws Exception{
         if(it.hasNext() && next_seq_num < sendBase + N){
+
+
             SelectiveRepeatPacket packet = it.next();
             float r = random.nextFloat();
             if (r > lostPacket){
                 packet.time = scheduler.getCurrentTime();
                 System.out.println(scheduler.getCurrentTime() + ": --> send: message: "+packet.message.num);
                 host.getIPLayer().send(IPAddress.ANY, packet.address,IP_PROTO_SELECTIVEREPEAT,packet.message);
-                MyTimer timer = new MyTimer(scheduler, rto, packet.message.num);
+
+                next_seq_num ++;
+
             }
             else{
                 System.out.println(scheduler.getCurrentTime()+": paquet perdu");
+                packet = it.next();
+
             }
-            next_seq_num ++;
+            MyTimer timer = new MyTimer(scheduler, rto, packet.message.num);
+            timer_list.add(timer);
+            timer.start();
             sendNext();
         }
     }
@@ -209,13 +230,16 @@ public class SelectiveRepeatProtocol implements IPInterfaceListener {
         }
 
         protected void run() throws Exception {
-            System.out.println(scheduler.getCurrentTime()+": ---- TIMEOUT");
+            System.out.println(scheduler.getCurrentTime()+": ---- TIMEOUT "+ numTimer );
             N=controller.isALoss(true);// change the size of the window because there is a timeout
-            //NChanged(true);
-            next_seq_num = sendBase;
-            it=window.iterator();
+            NChanged(true);
             host.getIPLayer().send(IPAddress.ANY, window.get(numTimer).address,IP_PROTO_SELECTIVEREPEAT,window.get(numTimer).message);
-            MyTimer timer = new MyTimer(scheduler, rto, numTimer);
+            start();
+
+        }
+
+        public void stop(){
+            super.stop();
         }
     }
 }

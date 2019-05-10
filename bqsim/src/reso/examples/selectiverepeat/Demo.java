@@ -5,9 +5,7 @@ import reso.common.Network;
 import reso.ethernet.EthernetAddress;
 import reso.ethernet.EthernetFrame;
 import reso.ethernet.EthernetInterface;
-import reso.examples.pingpong.AppReceiver;
-import reso.examples.pingpong.AppSender;
-import reso.examples.static_routing.AppSniffer;
+
 import reso.ip.IPAddress;
 import reso.ip.IPHost;
 import reso.scheduler.AbstractScheduler;
@@ -15,8 +13,7 @@ import reso.scheduler.Scheduler;
 import reso.utilities.NetworkBuilder;
 
 public class Demo {
-    /* Enable or disable packet capture (can be used to observe ARP messages) */
-    private static final boolean ENABLE_SNIFFER= false;
+
 
 
     public static void main(String [] args) {
@@ -30,7 +27,7 @@ public class Demo {
         }catch (Exception e){
             System.out.println("valeurs incorrectes. Les paramètres par défaut sont appliqués");
             packetQuantities = 10;
-            lostPacket = 0.2f;
+            lostPacket = 0.8f;
             lostAck = 0.0f;
         }
         AbstractScheduler scheduler= new Scheduler();
@@ -44,7 +41,7 @@ public class Demo {
             IPHost host1= NetworkBuilder.createHost(network, "H1", IP_ADDR1, MAC_ADDR1);
             host1.getIPLayer().addRoute(IP_ADDR2, "eth0");
 
-            host1.addApplication(new ApplicationSender(host1,IP_ADDR2,packetQuantities,lostPacket));
+            host1.addApplication(new ApplicationSender(host1,IP_ADDR2,packetQuantities -1,lostPacket));
 
             IPHost host2= NetworkBuilder.createHost(network,"H2", IP_ADDR2, MAC_ADDR2);
             host2.getIPLayer().addRoute(IP_ADDR1, "eth0");
