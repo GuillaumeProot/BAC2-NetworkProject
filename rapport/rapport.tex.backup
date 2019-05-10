@@ -72,7 +72,7 @@ Guillaume \textsc{Proot}
 		  \item Quand un paquet est reçu par le receveur, il est d'abord placé en cache. Ensuite, s'il s'agit du premier élément de la fenêtre, la fenêtre avance de 1, sinon on attend que le premier élément soit reçu.
 		  \item Quand un ACK est reçu par l'envoyeur, il est lui aussi placé en cache. Dans le même principe que pour le receveur, s'il s'agit du premier élément de la fenêtre, la fenêtre avance de une position.
 		  \item Lorsque l'envoyeur envoie un paquet, une place se fait dans la fenêtre. La méthode \textit{sendNext} est alors appelée jusqu'à ce que la fenêtre soit remplie.
-		  \item Le \textit{rto} est calculé à chaque réception d'ACK et à chaque fois qu'un timeur arrive à expiration. À chaque envoi de paquet, le moment auquel est envoyé ce paquet est gardé en mémoire. Lors de la réception de l'ACK correspondant, le rtt vaut la différence entre le moment où l'ACK est reçu et le moment auquel a été envoyé le paquet. Le calcul du rto se fait par les formules vues en cours.
+		  \item Le \textit{rto} est recalculé à chaque réception d'ACK et à chaque fois qu'un timeur arrive à expiration. À chaque envoi de paquet, le moment auquel est envoyé ce paquet est gardé en mémoire. Lors de la réception de l'ACK correspondant, le rtt vaut la différence entre le moment où l'ACK est reçu et le moment auquel a été envoyé le paquet. Le calcul du rto se fait par les formules vues en cours.
 		\end{itemize}
 
 	\subsection{Congestion Control}
@@ -84,26 +84,24 @@ Guillaume \textsc{Proot}
 	
 	\subsection{Difficultés liées à l'utilisation du simulateur}
 		\begin{itemize}
-		  \item La prise en main d'une application développée par une tierce personne est, de façon surprenant, très chronophage. Nous avons passer un bon moment à relire le code du simulateur pour en comprendre du mieux possible le fonctionnement.
-		  \item TODO Je ne sais pas quoi mettre ensuite.
+		  \item TODO
 		\end{itemize}
 
 	\subsection{Difficultés liées à l'implémentation de Selective Repeat et de Congestion Control}
 		\begin{itemize}
-		  \item La plus grosse difficultée rencontrée est la gestion des \textit{Timers}. Nous n'avons pas réussis à complètement implémenter ceux-ci. Nous n'avons pas trouver de solution pour stoper le bon Timer au bon moment. Nous avons essayer d'utiliser une ArrayList de Timers pour, lorsqu'un ACK(x) est reçu, arrêter le Timer(x) mais celà ne nous a pas donné de résultats probrants.
-		  \item TODO Compléter aussi.
+		  \item TODO
 		\end{itemize}
 
 \section{État de l'implémentation finale}
-	Le protocol fonctionne correctement si nous n'activons pas la perte de paquets et d'ACKs. Malheureusement notre mauvaise gestion des timers ne nous permets pas de gérer de manière totalement fonctionnelle le renvoi de paquets. Le protocol est améliorable en trouvant une meilleure solution pour la gestion des renvois de paquets.
+	
 
 \section{Note d'utilisation}
 	\begin{itemize}
-		\item Étant donné que pour chaque utilisation la taille de la fenêtre ne sera pas constante, lors de l'exécution de notre programme nous stockons dans un fichier \textit{data.txt} les données de la taille de la fenetre de la dernière exécution.
-	La colonne de gauche représente le temps du \textit{scheduler} et la colonne de droite la taille de la fenêtre à ce moment là.
-	Pour créer le plot de la dernière exécution, il faut enter la commande suivante via gnuplot:
+		\item Etant donné que pour chaque utilisation la taille de la fenetre ne sera pas constante, lors de l'exécution de notre programme nous stockons dans un fichier \textit{data.txt} les données de la taille de la fenetre de la dernière exécution.
+	La colonne de gauche représente le temps du scheduler et la colonne de droite la taille de la fenètre à ce moment là.
+	Pour créer le plot de la dernière exécution, il faut renter la commande suivante via gnuplot:
 	\begin{center}
-		\textit{'plot "data.txt" with linespoints'}
+		\textit{plot "data.txt" with linespoints}
 	\end{center} 
 	\item Nous avons choisi d'afficher les logs du déroulement de paquets directement dans la console.
 	\end{itemize}
